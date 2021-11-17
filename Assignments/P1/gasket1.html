@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html;charset=utf-8" >
+
+<title>2D Sierpinski Gasket</title>
+
+<!--
+    Additional functionality, slider to adjust the speed at which each iteration
+    is displayed.
+-->
+<div class="slider">
+<p><b>Speed(ms): </b><span id="speedValue"></span></p>
+<input type="range" min="50" max="500" value="250" class="slider" id="speedSlider">
+</div>
+
+<div class="randomToggle">
+<p>Random mode: </p>
+<button id="btn" onclick="toggle();">Off</button>
+</div>
+
+<script type="text/javascript" src="../Common/webgl-utils.js"></script>
+<script type="text/javascript" src="../Common/initShaders.js"></script>
+<script type="text/javascript" src="../Common/MV.js"></script>
+<script type="text/javascript" src="gasket1.js"></script>
+</head>
+
+<body>
+<canvas id="gl-canvas" width="512" height="512">
+Oops ... your browser doesn't support the HTML5 canvas element
+</canvas>
+</body>
+</html>

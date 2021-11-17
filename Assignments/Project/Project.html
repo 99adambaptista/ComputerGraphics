@@ -1,0 +1,216 @@
+<!DOCTYPE html>
+<html>
+    <style>
+        body {font-family: Arial;}
+        .tab button.active {
+            background-color: #ccc;
+        }
+        .tabcontent {
+            display: none;
+            border-top: none;
+        }
+
+        #byte_content {
+            margin: 5px 0;
+            max-height: 100px;
+            overflow-y: auto;
+            overflow-x: hidden;
+        }
+        #byte_range { margin-top: 5px; }
+    </style>
+    <body>
+        <div class="tab">
+            <button class="tablinks" onclick="openEdit(event, 'Line')">Line</button>
+            <button class="tablinks" onclick="openEdit(event, 'Triangle')">Triangle</button>
+            <button class="tablinks" onclick="openEdit(event, 'Square')">Square</button>
+            <button class="tablinks" onclick="openEdit(event, 'Rectangle')">Rectangle</button>
+            <button class="tablinks" onclick="openEdit(event, 'Circle')">Circle</button>
+            <button class="tablinks" onclick="openEdit(event, 'Ellipse')">Ellipse</button>
+            <button class="tablinks" onclick="openEdit(event, 'Curve')">Curve</button>
+            <button class="tablinks" onclick="openEdit(event, 'Poly-Line')">Poly-Line</button>
+            <button class="tablinks" onclick="openEdit(event, 'Polygon')">Polygon</button>
+            <button class="tablinks" onclick="openEdit(event, 'Load')">Load</button>
+            <button class="tablinks" onclick="openEdit(event, 'Save')">Save</button>
+        </div>
+        <p></p>
+
+        <div id="Line" class="tabcontent">
+            <div>
+                <label>Length:</label>
+            </div>
+            <input type="number" id="ll" name="2" min=0 max=512 value=0>
+        
+            <p></p>
+
+            <button onclick="insert_shape(0);">Draw</button>
+        </div>
+        
+        <div id="Triangle" class="tabcontent">
+            <div>
+                <label>Radius:</label>
+            </div>
+            <input type="number" id="trir" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+        
+            <button onclick="insert_shape(1);">Draw</button>
+        </div>
+        
+        <div id="Square" class="tabcontent">
+            <div>
+                <label>Size:</label>
+            </div>
+            <input type="number" id="sr" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+
+            <button onclick="insert_shape(2);">Draw</button>
+        </div>
+        
+        <div id="Rectangle" class="tabcontent">
+            <div>
+                <label>Width:</label>
+            </div>
+            <input type="number" id="rw" name="2" min=0 max=512 value=0>
+            <div>
+                <label>Height:</label>
+            </div>
+            <input type="number" id="rh" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+        
+            <button onclick="insert_shape(3);">Draw</button>
+        </div>
+        
+        <div id="Circle" class="tabcontent">
+            <div>
+                <label>Radius:</label>
+            </div>
+            <input type="number" id="cr" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+            
+            <button onclick="insert_shape(4);">Draw</button>
+        </div>
+        
+        <div id="Ellipse" class="tabcontent">
+            <div>
+                <label>X Radius:</label>
+            </div>
+            <input type="number" id="exr" name="2" min=0 max=512 value=0>
+            <div>
+                <label>Y Radius:</label>
+            </div>
+            <input type="number" id="eyr" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+            
+            <button onclick="insert_shape(16);">Draw</button>
+        </div>
+        
+        <div id="Curve" class="tabcontent">
+            <div>
+                <label>Point 1 (x0, y0):</label>
+            </div>    
+            <input type="number" id="bx0" name="1" min=0 max=512 value=0>
+            <input type="number" id="by0" name="1" min=0 max=512 value=0>
+            <div>
+                <label>Point 2 (x1, y1):</label>
+            </div>
+            <input type="number" id="bx1" name="2" min=0 max=512 value=0>
+            <input type="number" id="by1" name="2" min=0 max=512 value=0>
+            <div>
+                <label>Point 3 (x2, y2):</label>
+            </div>
+            <input type="number" id="bx2" name="2" min=0 max=512 value=0>
+            <input type="number" id="by2" name="2" min=0 max=512 value=0>
+            <div>
+                <label>Point 4 (x3, y3):</label>
+            </div>
+            <input type="number" id="bx3" name="2" min=0 max=512 value=0>
+            <input type="number" id="by3" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+            
+            <button onclick="insert_shape(6);">Draw</button>
+        </div>
+
+        <div id="Poly-Line" class="tabcontent">
+
+            <div>
+                <label>Points:</label>
+            </div>
+            <textarea id="polyline" rows=11 cols=78 color="red" placeholder=
+            "   Enter two or more points in the form 'x, y' seperated by a space, comma, or new line.
+
+    Every two numbers seperated by a comma is one point in the form (x, y), single digits will be ignored.
+
+i.e. the points (1, 23), (3, 4), (5, 6):
+1, 23, 3,4
+5, 6
+            "></textarea>
+            <div id="validator">
+
+            </div>
+            
+            <p></p>
+            
+            <button onclick="insert_shape(7);">Draw</button>
+        </div>
+
+        <div id="Polygon" class="tabcontent">
+            <div>
+                <label>Top width:</label>
+            </div>
+            <input type="number" id="ptw" name="2" min=0 max=512 value=0>
+            <div>
+                <label>Bottom Width:</label>
+            </div>
+            <input type="number" id="pbw" name="2" min=0 max=512 value=0>
+            <div>
+                <label>Height:</label>
+            </div>
+            <input type="number" id="ph" name="2" min=0 max=512 value=0>
+            
+            <p></p>
+            
+            <button onclick="insert_shape(8);">Draw</button>
+        </div>
+
+        <div id="Load" class="tabcontent">
+            <div>
+                <input type="file" id="files" name="file" />
+            </div>
+            
+            <p></p>
+            
+            <button onclick="load_json();">Draw</button>
+        </div>
+
+        <div id="Save" class="tabcontent">
+            <button onclick="save_json()">Save to JSON</button>
+            <a id="download" download="image.jpeg" href="" onclick="download_img(this);">Save as jpeg</a>
+        </div>
+        
+        <p></p>
+
+        <div>
+        <input type="color" id="colorpicker" value="#ff0000" style="width:41px; height:17px">
+        <button onclick="clearBackground();">Clear</button>
+        <button onclick="rand();">Random</button>
+        </div>
+        
+        <p></p>
+
+        <canvas id="canvas" width="512" height="512" style="border:1px solid #000000;">
+            Oops ... your browser doesn't support the HTML5 canvas element
+        </canvas>
+
+        <p><b>Drag to move, scroll wheel to scale, [r] and [e] to rotate</b></p>
+        <p><b>To copy and paste, must hold left click down on shape</b></p>
+        <p><b>CTRL+c: copy, CTRL+v: paste, CTRL+z: undo</b></p>
+
+        <script type="text/javascript" src="Project.js"></script>
+
+    </body>
+</html>
